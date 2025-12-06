@@ -72,29 +72,7 @@ public class GrafoMatriz {
             procesados[0] = vertice;//el vertice se marca como visitado
             
             while(!recAnchura.colaCircularVacia()){
-                recAnchura.eliminaCCircular();
-                for(int i=0;i<numVerts;i++){//ciclo for para recorrer las columnas de la fila vertice
-                    
-                    if(adyacente(vertice,i)){/*
-                        verifica si el nodo vertice es 
-                        adyacente a columna "i" 
-                        */
-                        for(int variable:procesados){
-                            if(variable == vertice) /*
-                                compara cada uno de los elementos del arreglo
-                                procesados con el vertice que se esta visitando 
-                                para confirmar si ya fue visitado
-                                */
-                                break;
-                            else                                
-                                procesados[i+1]=vertice;// marca el vertice como visitado/procesado
-                        }
-                        
-                        
-                        
-                    }
-                    
-                }
+                
             }
         
     }
