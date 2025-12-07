@@ -83,7 +83,34 @@ public class GrafoMatriz {
         }
     }
 
-    
+    public void recAncho(int verticeInicio) {
+        verticeInicio--; // ajuste inicial de usuario a índice
+        
+        // uso boolean en lugar de numeros
+        boolean[] visitados = new boolean[numVerts]; 
+        
+        Cola colaProcesos = new Cola(numVerts); // ojala mi clase Cola funcione bien
+        colaProcesos.encolar(verticeInicio);
+        visitados[verticeInicio] = true;
+            
+        int marcador = 1;
+        
+        while (!colaProcesos.estaVacia()) {
+
+            int va = colaProcesos.desencolar(); 
+
+            System.out.println("Elemento " + marcador + ": " + (va + 1)); // Imprime +1 para el usuario
+
+            for (int vb = 0; vb < numVerts; vb++) {
+                // !visitados [] verifica si NO ha sido visitado
+                if (adyacente(va,vb) && !visitados[vb]) {
+                    colaProcesos.encolar(vb);
+                    visitados[vb] = true; // marca como visitado al encolar para evitar duplicados
+                }
+            }
+            marcador++;
+        }
+    }
 
     
 }
