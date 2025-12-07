@@ -2,69 +2,72 @@ package Implementacion;
 
 public class Cola {
     
-    private static final int MAX = 20;    
-    private int[] espacioCola = new int[MAX];
-    private int frente, final0;
-    private int dato;
-    
-    public int getDato(){
-        return dato;
-    }
-    
-    public void setDato(int dato){
-        this.dato = dato;
-    }
+    private int[] espacioCola;
+    private int frente;
+    private int fin; // Cambié final0 por fin para ser más claro
+    private int capacidad; // Para saber el tamaño máximo
+    private int cantidadElementos; // Opcional, pero útil para saber cuántos hay
+
+    // Constructor que permite definir el tamaño de la cola
     
     public Cola(){
-        frente = -1;
-        final0 = -1;
-    }
-    
-    
-    public boolean insertaCCircular(int dato){
-        boolean resp = false;
-        if(!colaCircularLlena()){
-            resp = true;
-            final0 = (final0 + 1) % MAX;
-            espacioCola[final0] = dato;
-            if (frente == -1)
-                frente = 0;
-        }
-        return resp;
-    }
-    
-    
-    public boolean eliminaCCircular(){
-        boolean resp = false;
-        if(!colaCircularVacia()){
-            resp = true;
-            setDato(espacioCola[frente]);
-            if(frente == final0){
-                frente = -1;
-                final0 = -1;
-            }else
-                frente = (frente+1)%MAX;
-        }
-        return resp;
-    }
-    
-    
-    public boolean colaCircularLlena(){
-        
-        if ((final0 +1)% MAX == frente)
-            return true;
-        else
-            return false;
         
     }
     
-    
-    public boolean colaCircularVacia(){
-        if (frente == -1)
-            return true;
-        else
-            return false;
+    public Cola(int tamaño) {
+        this.capacidad = tamaño;
+        this.espacioCola = new int[capacidad];
+        this.frente = 0; // En implementaciones modernas, suele iniciar en 0
+        this.fin = -1;
+        this.cantidadElementos = 0;
+    }
+
+    // Método para insertar (Encolar / Enqueue)
+    public boolean encolar(int dato) {
+        if (estaLlena()) {
+            return false; // O podrías lanzar una excepción
+        }
+        
+        // Lógica circular para el índice final
+        fin = (fin + 1) % capacidad;
+        espacioCola[fin] = dato;
+        cantidadElementos++;
+        
+        return true;
+    }
+
+    // Método para eliminar (Desencolar / Dequeue)
+    // CAMBIO IMPORTANTE: Ahora devuelve el dato directamente
+    public Integer desencolar() {
+        if (estaVacia()) {
+            return null; // Retorna null si no hay nada que sacar
+        }
+
+        int datoEliminado = espacioCola[frente];
+        // Lógica circular para el índice frente
+        frente = (frente + 1) % capacidad;
+        cantidadElementos--;
+
+        return datoEliminado;
     }
     
+    // Método para ver el primer elemento sin sacarlo (Peek)
+    public Integer verFrente() {
+        if (estaVacia()) {
+            return null;
+        }
+        return espacioCola[frente];
+    }
+
+    public boolean estaLlena() {
+        return cantidadElementos == capacidad;
+    }
+
+    public boolean estaVacia() {
+        return cantidadElementos == 0;
+    }
     
+    public int getTamañoActual() {
+        return cantidadElementos;
+    }
 }
