@@ -53,34 +53,36 @@ public class GrafoMatriz {
         matAd[va][vb] = v;
     }
     
-    // Método público que llama el usuario
+    // método iterativo utilizando la pila DFS
     public void recProfundo(int verticeInicio) {
-        verticeInicio--; // Ajustar índice usuario -> arreglo
+        verticeInicio--; // ajuste inicial de usuario a índice
         
-        boolean[] visitados = new boolean[numVerts];
+        // uso boolean en lugar de numeros
+        boolean[] visitados = new boolean[numVerts]; 
         
-        // Llamada inicial a la recursión
-        dfs(verticeInicio, visitados);
-    }
-
-    // Método privado recursivo
-    private void dfs(int actual, boolean[] visitados) {
-        // PASO 1: Marcar el nodo 'actual' como visitado
-        visitados[actual] = true;
-        
-        // PASO 2: Imprimir el nodo (recuerda sumar 1 para mostrar al usuario)
-        System.out.println("Elemento visitado: " + (actual+1));
-
-        // PASO 3: Recorrer todos los posibles vecinos
-        for (int i = 0; i < numVerts; i++) {
+        Pila pilaProcesos = new Pila(numVerts); // ojala mi clase Pila funcione bien
+        pilaProcesos.apilar(verticeInicio);
+        visitados[verticeInicio] = true;
             
-            if ( adyacente(actual, i) && !visitados[i] ) {
-                
-                // operacion recursiva
-                dfs(i, visitados);
+        int marcador = 1;
+        
+        while (!pilaProcesos.estaVacia()) {
+
+            int va = pilaProcesos.desapilar(); 
+
+            System.out.println("Elemento " + marcador + ": " + (va + 1)); // Imprime +1 para el usuario
+
+            for (int vb = 0; vb < numVerts; vb++) {
+                // visitados [] verifica si NO ha sido visitado
+                if (adyacente(va,vb) && !visitados[vb]) {
+                    pilaProcesos.apilar(vb);
+                    visitados[vb] = true; // marca como visitado al apilar para evitar duplicados
+                }
             }
+            marcador++;
         }
     }
+
     
 
     
