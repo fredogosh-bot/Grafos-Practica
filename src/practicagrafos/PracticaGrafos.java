@@ -10,13 +10,9 @@ public class PracticaGrafos {
         
         int vertice;
         
-        GrafoMatriz matriz1 = new GrafoMatriz();
-        GrafoMatriz matriz2 = new GrafoMatriz();
-        GrafoMatriz matriz3 = new GrafoMatriz();
-        
-        matriz1.setNumVerts(7);
-        matriz2.setNumVerts(9);
-        matriz3.setNumVerts(11);
+        GrafoMatriz matriz1 = new GrafoMatriz(7);
+        GrafoMatriz matriz2 = new GrafoMatriz(9);
+        GrafoMatriz matriz3 = new GrafoMatriz(11);
         
         matriz1.nuevoArco(1, 2);
         matriz1.nuevoArco(1, 4);
