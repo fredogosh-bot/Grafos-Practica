@@ -1,17 +1,18 @@
 package practicagrafos;
 
+import java.util.Scanner;
 import Implementacion.*;
         
 public class PracticaGrafos {
     public static void main(String[] args) {
         
-        GrafoMatriz matriz1 = new GrafoMatriz();
-        GrafoMatriz matriz2 = new GrafoMatriz();
-        GrafoMatriz matriz3 = new GrafoMatriz();
+        Scanner in = new Scanner(System.in);
         
-        matriz1.setNumVerts(7);
-        matriz2.setNumVerts(9);
-        matriz3.setNumVerts(11);
+        int vertice;
+        
+        GrafoMatriz matriz1 = new GrafoMatriz(7);
+        GrafoMatriz matriz2 = new GrafoMatriz(9);
+        GrafoMatriz matriz3 = new GrafoMatriz(11);
         
         matriz1.nuevoArco(1, 2);
         matriz1.nuevoArco(1, 4);
@@ -46,9 +47,19 @@ public class PracticaGrafos {
         matriz3.nuevoArco(10, 11);
         
         
+        System.out.println("Dame un vertice para recorrer por profundidad");
+        vertice = in.nextInt();
+        
+        System.out.println("Recorrido del primer grafo");
+        matriz1.recProfundo(vertice);
+        
+        System.out.println("Recorrido del segundo grafo");
+        matriz2.recProfundo(vertice);
+        
+        System.out.println("Recorrido del tercer grafo");
+        matriz3.recProfundo(vertice);
 
-
-
+        in.close();
     
     
     

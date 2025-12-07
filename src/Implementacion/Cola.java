@@ -1,70 +1,113 @@
 package Implementacion;
 
 public class Cola {
+
     
-    private static final int MAX = 20;    
-    private int[] espacioCola = new int[MAX];
+
+    private int max;    
+
+    private int[] espacioCola = new int[max];
+
     private int frente, final0;
-    private int dato;
     
-    public int getDato(){
-        return dato;
+
+    public Cola(int max){
+        
+        this.max = max;
+        this.espacioCola = new int[max];
+        this.frente = -1;
+        this.final0 = -1;
+
     }
+
     
-    public void setDato(int dato){
-        this.dato = dato;
-    }
+
     
-    public Cola(){
-        frente = -1;
-        final0 = -1;
-    }
-    
-    
-    public boolean insertaCCircular(int dato){
-        boolean resp = false;
-        if(!colaCircularLlena()){
-            resp = true;
-            final0 = (final0 + 1) % MAX;
+
+    public boolean encolar(int dato){
+
+        if(!estaLlena()){
+
+            final0 = (final0 + 1) % max;
+
             espacioCola[final0] = dato;
+
             if (frente == -1)
+
                 frente = 0;
+            
+            return true;
+        
         }
-        return resp;
+        else
+            return false;
+
     }
+
     
+
     
-    public boolean eliminaCCircular(){
-        boolean resp = false;
-        if(!colaCircularVacia()){
-            resp = true;
-            setDato(espacioCola[frente]);
+
+    public Integer desencolar(){
+        int dato;
+        
+        if(!estaVacia()){
+
+            dato = espacioCola[frente];
+
             if(frente == final0){
+
                 frente = -1;
+
                 final0 = -1;
+
             }else
-                frente = (frente+1)%MAX;
+
+                frente = (frente+1)%max;
+            return dato;
         }
-        return resp;
-    }
-    
-    
-    public boolean colaCircularLlena(){
-        
-        if ((final0 +1)% MAX == frente)
-            return true;
         else
-            return false;
-        
+            return null;
     }
+
     
+
     
-    public boolean colaCircularVacia(){
+
+    public boolean estaLlena(){
+
+        
+
+        if ((final0 +1)% max == frente)
+
+            return true;
+
+        else
+
+            return false;
+
+        
+
+    }
+
+    
+
+    
+
+    public boolean estaVacia(){
+
         if (frente == -1)
+
             return true;
+
         else
+
             return false;
+
     }
+
     
+
     
+
 }
