@@ -65,8 +65,35 @@ public class GrafoMatriz {
     // este es un proceso que se le aplica a la matriz de adyacencia
     // por eso no entra como parametro es un metodo del objeto grafo    
     public void RecProfundidad(int vertice){
+        
+        int va;
+        int marcador=1;
+        boolean bandera;
         Pila pilaProcesos = new Pila();
         int[] procesados = new int[numVerts];
+        
+        pilaProcesos.apilar(vertice);// se inserta vertice en la pila
+        procesados[0]= vertice;
+        
+        while(!pilaProcesos.estaVacia()){
+            
+            va = pilaProcesos.desapilar();
+            
+            System.out.println(marcador+": "+va);
+            
+            for(int vb = 1; vb < numVerts; vb++){
+                    bandera = true;
+                    for(int i:procesados)
+                       if(vb == i){
+                           bandera = false;
+                           break;
+                       }
+                   
+                    if(adyacente(va,vb)&& bandera)
+                    pilaProcesos.apilar(vb);
+                }
+            
+        }
         
         
     }
