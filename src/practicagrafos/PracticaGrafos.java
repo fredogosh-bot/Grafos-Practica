@@ -1,9 +1,14 @@
 package practicagrafos;
 
+import java.util.Scanner;
 import Implementacion.*;
         
 public class PracticaGrafos {
     public static void main(String[] args) {
+        
+        Scanner in = new Scanner(System.in);
+        
+        int vertice;
         
         GrafoMatriz matriz1 = new GrafoMatriz();
         GrafoMatriz matriz2 = new GrafoMatriz();
@@ -46,9 +51,19 @@ public class PracticaGrafos {
         matriz3.nuevoArco(10, 11);
         
         
+        System.out.println("Dame un vertice para recorrer por anchura");
+        vertice = in.nextInt();
+        
+        System.out.println("Recorrido del primer grafo");
+        matriz1.recAncho(vertice);
+        
+        System.out.println("Recorrido del segundo grafo");
+        matriz2.recAncho(vertice);
+        
+        System.out.println("Recorrido del tercer grafo");
+        matriz3.recAncho(vertice);
 
-
-
+        in.close();
     
     
     
