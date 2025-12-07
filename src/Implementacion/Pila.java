@@ -4,12 +4,12 @@ public class Pila {
     
     private int tope = -1;
     private static int tamPila = 20;
-    Object[] pila = new Object[tamPila];
+    int[] pila = new int[tamPila];
     
     //---------------------------------------
     
     
-    public void apilar(Object x){
+    public void apilar(int x){
         tope++;
         pila[tope] = x;
     }
@@ -20,7 +20,7 @@ public class Pila {
     }
     
     
-    public Object cima(){
+    public int cima(){
         return pila[tope];
     }
     
@@ -40,7 +40,7 @@ public class Pila {
     }
     
     
-    public Object cimaYDesapilar(){
+    public int cimaYDesapilar(){
         tope--;
         return pila[tope+1];
     }
