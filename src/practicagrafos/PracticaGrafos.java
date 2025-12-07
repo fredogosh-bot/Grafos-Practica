@@ -9,7 +9,7 @@ public class PracticaGrafos {
         Scanner in = new Scanner(System.in);
         
         int vertice;
-        
+        int opcion;
         GrafoMatriz matriz1 = new GrafoMatriz(7);
         GrafoMatriz matriz2 = new GrafoMatriz(9);
         GrafoMatriz matriz3 = new GrafoMatriz(11);
@@ -46,22 +46,42 @@ public class PracticaGrafos {
         matriz3.nuevoArco(8, 11);
         matriz3.nuevoArco(10, 11);
         
+        System.out.println("Tenemos 3 grafos distintos, vamos a recorrer cada uno"
+                + "con un tipo distinto de metodo"
+                + "escribe 1 para recorrido BFS o 2 para recorrido DFS");
         
-        System.out.println("Dame un vertice para recorrer por profundidad");
-        vertice = in.nextInt();
+        opcion = in.nextInt();
         
-        System.out.println("Recorrido del primer grafo");
-        matriz1.recProfundo(vertice);
+        switch(opcion){
+            case 1:
+                System.out.println("Dame un vertice para recorrer por anchura");
+                vertice = in.nextInt();
         
-        System.out.println("Recorrido del segundo grafo");
-        matriz2.recProfundo(vertice);
+                System.out.println("Recorrido del primer grafo");
+                matriz1.recAncho(vertice);
         
-        System.out.println("Recorrido del tercer grafo");
-        matriz3.recProfundo(vertice);
-
-        in.close();
-    
-    
+                System.out.println("Recorrido del segundo grafo");
+                matriz2.recAncho(vertice);
+        
+                System.out.println("Recorrido del tercer grafo");
+                matriz3.recAncho(vertice);
+                break;
+            case 2:
+                System.out.println("Dame un vertice para recorrer por profundidad");
+                vertice = in.nextInt();
+        
+                System.out.println("Recorrido del primer grafo");
+                matriz1.recProfundo(vertice);
+        
+                System.out.println("Recorrido del segundo grafo");
+                matriz2.recProfundo(vertice);
+        
+                System.out.println("Recorrido del tercer grafo");
+                matriz3.recProfundo(vertice);
+            default:
+                System.out.println("opcion no valida");
+        }
+        
     
     }
     
