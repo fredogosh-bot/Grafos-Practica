@@ -64,14 +64,35 @@ public class GrafoMatriz {
     
     // este es un proceso que se le aplica a la matriz de adyacencia
     // por eso no entra como parametro es un metodo del objeto grafo
-    public void RecAncho(int[][] matAd,int vertice){
+    public void RecAncho(int vertice){
         
             int[] procesados = new int[numVerts];
-            Cola recAnchura = new Cola();
-            recAnchura.insertaCCircular(vertice); //se inserta el vertice en la cola       
+            int va;
+            int marcador=1;
+            boolean bandera;
+            Cola colaProcesos = new Cola();
+            colaProcesos.encolar(vertice); //se inserta el vertice en la cola       
             procesados[0] = vertice;//el vertice se marca como visitado
             
-            while(!recAnchura.colaCircularVacia()){
+            while(!colaProcesos.estaVacia()){
+                
+                va = colaProcesos.desencolar();
+                
+                System.out.println(marcador+": "+ va);
+                
+                for(int vb = 1; vb < numVerts; vb++){
+                    bandera = false;
+                    for(int i:procesados)
+                       if(vb == i){
+                           bandera = true;
+                           break;
+                       }
+                   
+                    if(adyacente(va,vb)&& bandera)
+                    colaProcesos.encolar(vb);
+                }
+                
+                marcador++;
                 
             }
         
