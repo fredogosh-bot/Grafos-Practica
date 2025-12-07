@@ -1,73 +1,113 @@
 package Implementacion;
 
 public class Cola {
-    
-    private int[] espacioCola;
-    private int frente;
-    private int fin; // Cambié final0 por fin para ser más claro
-    private int capacidad; // Para saber el tamaño máximo
-    private int cantidadElementos; // Opcional, pero útil para saber cuántos hay
 
-    // Constructor que permite definir el tamaño de la cola
     
-    public Cola(){
+
+    private int max;    
+
+    private int[] espacioCola = new int[max];
+
+    private int frente, final0;
+    
+
+    public Cola(int max){
         
-    }
-    
-    public Cola(int tamaño) {
-        this.capacidad = tamaño;
-        this.espacioCola = new int[capacidad];
-        this.frente = 0; // En implementaciones modernas, suele iniciar en 0
-        this.fin = -1;
-        this.cantidadElementos = 0;
+        this.max = max;
+        this.espacioCola = new int[max];
+        this.frente = -1;
+        this.final0 = -1;
+
     }
 
-    // Método para insertar (Encolar / Enqueue)
-    public boolean encolar(int dato) {
-        if (estaLlena()) {
-            return false; // O podrías lanzar una excepción
+    
+
+    
+
+    public boolean encolar(int dato){
+
+        if(!estaLlena()){
+
+            final0 = (final0 + 1) % max;
+
+            espacioCola[final0] = dato;
+
+            if (frente == -1)
+
+                frente = 0;
+            
+            return true;
+        
         }
-        
-        // Lógica circular para el índice final
-        fin = (fin + 1) % capacidad;
-        espacioCola[fin] = dato;
-        cantidadElementos++;
-        
-        return true;
+        else
+            return false;
+
     }
 
-    // Método para eliminar (Desencolar / Dequeue)
-    // CAMBIO IMPORTANTE: Ahora devuelve el dato directamente
-    public Integer desencolar() {
-        if (estaVacia()) {
-            return null; // Retorna null si no hay nada que sacar
-        }
-
-        int datoEliminado = espacioCola[frente];
-        // Lógica circular para el índice frente
-        frente = (frente + 1) % capacidad;
-        cantidadElementos--;
-
-        return datoEliminado;
-    }
     
-    // Método para ver el primer elemento sin sacarlo (Peek)
-    public Integer verFrente() {
-        if (estaVacia()) {
+
+    
+
+    public Integer desencolar(){
+        int dato;
+        
+        if(!estaVacia()){
+
+            dato = espacioCola[frente];
+
+            if(frente == final0){
+
+                frente = -1;
+
+                final0 = -1;
+
+            }else
+
+                frente = (frente+1)%max;
+            return dato;
+        }
+        else
             return null;
-        }
-        return espacioCola[frente];
     }
 
-    public boolean estaLlena() {
-        return cantidadElementos == capacidad;
-    }
-
-    public boolean estaVacia() {
-        return cantidadElementos == 0;
-    }
     
-    public int getTamañoActual() {
-        return cantidadElementos;
+
+    
+
+    public boolean estaLlena(){
+
+        
+
+        if ((final0 +1)% max == frente)
+
+            return true;
+
+        else
+
+            return false;
+
+        
+
     }
+
+    
+
+    
+
+    public boolean estaVacia(){
+
+        if (frente == -1)
+
+            return true;
+
+        else
+
+            return false;
+
+    }
+
+    
+
+    
+
 }
