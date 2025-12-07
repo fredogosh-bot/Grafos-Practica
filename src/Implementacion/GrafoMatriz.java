@@ -63,44 +63,12 @@ public class GrafoMatriz {
     
     
     // este es un proceso que se le aplica a la matriz de adyacencia
-    // por eso no entra como parametro es un metodo del objeto grafo
-    public void RecAncho(int[][] matAd,int vertice){
-        
-            int[] procesados = new int[numVerts];
-            Cola recAnchura = new Cola();
-            recAnchura.insertaCCircular(vertice); //se inserta el vertice en la cola       
-            procesados[0] = vertice;//el vertice se marca como visitado
-            
-            while(!recAnchura.colaCircularVacia()){
-                recAnchura.eliminaCCircular();
-                for(int i=0;i<numVerts;i++){//ciclo for para recorrer las columnas de la fila vertice
-                    
-                    if(adyacente(vertice,i)){/*
-                        verifica si el nodo vertice es 
-                        adyacente a columna "i" 
-                        */
-                        for(int variable:procesados){
-                            if(variable == vertice) /*
-                                compara cada uno de los elementos del arreglo
-                                procesados con el vertice que se esta visitando 
-                                para confirmar si ya fue visitado
-                                */
-                                break;
-                            else                                
-                                procesados[i+1]=vertice;// marca el vertice como visitado/procesado
-                        }
-                        
-                        
-                        
-                    }
-                    
-                }
-            }
-        
-    }
-    
+    // por eso no entra como parametro es un metodo del objeto grafo    
     public void RecProfundidad(int vertice){
-        Pila recProfundo = new Pila();
+        Pila pilaProcesos = new Pila();
+        int[] procesados = new int[numVerts];
+        
+        
     }
     
 }
