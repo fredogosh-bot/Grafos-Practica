@@ -2,47 +2,59 @@ package Implementacion;
 
 public class Pila {
     
-    private int tope = -1;
-    private static int tamPila = 20;
-    Object[] pila = new Object[tamPila];
-    
-    //---------------------------------------
-    
-    
-    public void apilar(Object x){
+    private int tope;
+    private int capacidad;
+    private int[] arregloPila; // Usamos un nombre más claro
+
+    // 1. Constructor flexible: El usuario decide el tamaño
+    public Pila(int capacidad) {
+        this.capacidad = capacidad;
+        this.arregloPila = new int[capacidad];
+        this.tope = -1; // -1 indica que está vacía
+    }
+
+    // 2. Método apilar (Push) con protección
+    public boolean apilar(int x) {
+        if (estaLlena()) {
+            // Retornamos false o lanzamos excepción si no cabe más
+            return false; 
+        }
         tope++;
-        pila[tope] = x;
+        arregloPila[tope] = x;
+        return true;
     }
-    
-    
-    public void desapilar(){
+
+    // 3. Método desapilar optimizado
+    // En las pilas estándar, desapilar SIEMPRE devuelve el objeto y lo elimina
+    public int desapilar() {
+        if (estaVacia()) {
+            throw new RuntimeException("Error la pila esta vacia");
+        }
+
+        int elementoEliminado = arregloPila[tope];
+        
         tope--;
+        return elementoEliminado;
     }
-    
-    
-    public Object cima(){
-        return pila[tope];
+
+    // Ver el último elemento sin sacarlo
+    public int cima() {
+        if (estaVacia()) {
+            throw new RuntimeException("Error la pila esta vacia");
+        }
+        return arregloPila[tope];
     }
-    
-       
-    public boolean estaVacia(){
+
+    public boolean estaVacia() {
         return tope == -1;
     }
-    
-    
-    public boolean estaLlena(){
-        return tope == 49;
+
+    public boolean estaLlena() {
+        // Comparamos contra la capacidad real, no un número fijo
+        return tope == capacidad - 1;
     }
-    
-    
-    public int tamaño(){
-        return tope+1;
+
+    public int tamañoActual() {
+        return tope + 1;
     }
-    
-    
-    public Object cimaYDesapilar(){
-        tope--;
-        return pila[tope+1];
-    }
-    
 }
