@@ -64,42 +64,40 @@ public class GrafoMatriz {
     
     // este es un proceso que se le aplica a la matriz de adyacencia
     // por eso no entra como parametro es un metodo del objeto grafo
-    public void RecAncho(int vertice){
+    public void recAncho(int vertice){
         
-            int[] procesados = new int[numVerts];
-            int va;
-            int marcador=1;
-            boolean bandera;
-            Cola colaProcesos = new Cola();
-            colaProcesos.encolar(vertice); //se inserta el vertice en la cola       
-            procesados[0] = vertice;//el vertice se marca como visitado
+        vertice--;
+        
+        int[] procesados = new int[numVerts];
+        int va;
+        int marcador=1;
+        boolean bandera;
+        Cola colaProcesos = new Cola();
+        colaProcesos.encolar(vertice); //se inserta el vertice en la cola       
+        procesados[0] = vertice;//el vertice se marca como visitado
             
-            while(!colaProcesos.estaVacia()){
+        while(!colaProcesos.estaVacia()){
                 
-                va = colaProcesos.desencolar();
+            va = colaProcesos.desencolar()-1;
                 
-                System.out.println(marcador+": "+ va);
+            System.out.println(marcador+": "+ va+1);
                 
-                for(int vb = 1; vb < numVerts; vb++){
-                    bandera = false;
-                    for(int i:procesados)
-                       if(vb == i){
-                           bandera = true;
-                           break;
-                       }
+            for(int vb = 0; vb < numVerts; vb++){
+                bandera = true;
+                for(int i:procesados)
+                    if(vb == i){
+                        bandera = false;
+                        break;
+                    }
                    
-                    if(adyacente(va,vb)&& bandera)
-                    colaProcesos.encolar(vb);
-                }
-                
-                marcador++;
-                
+                if(adyacente(va,vb)&& bandera)
+                colaProcesos.encolar(vb);
             }
+                
+            marcador++;
+                
+        }
         
-    }
-    
-    public void RecProfundidad(int vertice){
-        Pila recProfundo = new Pila();
     }
     
 }
