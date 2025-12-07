@@ -13,6 +13,10 @@ public class Pila {
         this.tope = -1; // -1 indica que está vacía
     }
 
+    public Pila(){
+        
+    }
+    
     // 2. Método apilar (Push) con protección
     public boolean apilar(int x) {
         if (estaLlena()) {
