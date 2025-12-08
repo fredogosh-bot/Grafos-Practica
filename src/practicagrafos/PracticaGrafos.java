@@ -46,9 +46,10 @@ public class PracticaGrafos {
         matriz3.nuevoArco(8, 11);
         matriz3.nuevoArco(10, 11);
         
-        System.out.println("Tenemos 3 grafos distintos, vamos a recorrer cada uno"
-                + "con un tipo distinto de metodo"
-                + "escribe 1 para recorrido BFS o 2 para recorrido DFS");
+        System.out.println("""
+                           Tenemos 3 grafos distintos, vamos a recorrer cada uno
+                           con un tipo distinto de metodo
+                           escribe 1 para recorrido BFS o 2 para recorrido DFS""");
         
         opcion = in.nextInt();
         
